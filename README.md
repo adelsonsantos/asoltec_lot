@@ -1,0 +1,1 @@
+# asoltec_lot
