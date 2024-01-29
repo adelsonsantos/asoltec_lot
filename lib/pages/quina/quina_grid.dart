@@ -165,7 +165,7 @@ class _QuinaState extends State<QuinaGrid> {
               }
 
               globals.resultadoQuinaString =
-                  "Quina (${state.quinaModel.dataApuracao})  \n\n ${state.quinaModel.listaDezenas[0]}   ${state.quinaModel.listaDezenas[1]}   ${state.quinaModel.listaDezenas[2]}   ${state.quinaModel.listaDezenas[3]}   ${state.quinaModel.listaDezenas[4]}    \n";
+                  "Quina (${state.quinaModel.dataApuracao})  \n\n ${state.quinaModel.listaDezenas[0]}   ${state.quinaModel.listaDezenas[1]}   ${state.quinaModel.listaDezenas[2]}   ${state.quinaModel.listaDezenas[3]}   ${state.quinaModel.listaDezenas[4]}    \n\n https://play.google.com/store/apps/details?id=com.asoltec.resultados_das_loterias ";
               for (String item in state.quinaModel.listaDezenas) {
                 globals.resultadoQuinaString + item;
               }

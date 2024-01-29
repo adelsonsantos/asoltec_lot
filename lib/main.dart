@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-//import 'package:loterias_caixa/pages/lotofacil/lotofacil_page.dart';
 import 'package:loterias_caixa/pages/home/home_page.dart';
 import 'package:loterias_caixa/pages/lotofacil/lotofacil_page.dart';
 import 'package:loterias_caixa/pages/quina/quina_page.dart';
+import 'package:loterias_caixa/pages/lotomania/lotomania_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,8 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/megasena': (BuildContext context) => const HomePage(),
         '/lotofacil': (BuildContext context) => const LotofacilPage(),
-        '/quina': (BuildContext context) => const QuinaPage()
+        '/quina': (BuildContext context) => const QuinaPage(),
+        '/lotomania': (BuildContext context) => const LotomaniaPage()
       },
       // home: const LotofacilPage(),
     );

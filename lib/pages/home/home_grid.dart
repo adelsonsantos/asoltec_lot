@@ -165,7 +165,7 @@ class _HomePageState extends State<HomeGrid> {
               }
 
               globals.resultadoMegaSenaString =
-                  "MEGA SENA (${state.megaSenaModel.dataApuracao})  \n\n ${state.megaSenaModel.listaDezenas[0]}   ${state.megaSenaModel.listaDezenas[1]}   ${state.megaSenaModel.listaDezenas[2]}   ${state.megaSenaModel.listaDezenas[3]}   ${state.megaSenaModel.listaDezenas[4]}   ${state.megaSenaModel.listaDezenas[5]}  \n";
+                  "MEGA SENA (${state.megaSenaModel.dataApuracao})  \n\n ${state.megaSenaModel.listaDezenas[0]}   ${state.megaSenaModel.listaDezenas[1]}   ${state.megaSenaModel.listaDezenas[2]}   ${state.megaSenaModel.listaDezenas[3]}   ${state.megaSenaModel.listaDezenas[4]}   ${state.megaSenaModel.listaDezenas[5]}  \n\n https://play.google.com/store/apps/details?id=com.asoltec.resultados_das_loterias ";
               for (String item in state.megaSenaModel.listaDezenas) {
                 globals.resultadoMegaSenaString + item;
               }

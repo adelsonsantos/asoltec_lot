@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.asoltec.resultados_das_loterias">
    <application
-        android:label="Resultados da Mega"
+        android:label="Resultados Loterias"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

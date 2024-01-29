@@ -5,25 +5,25 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:loterias_caixa/bloc/lotofacil/lotofacil_bloc.dart';
+import 'package:loterias_caixa/bloc/lotomania/lotomania_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loterias_caixa/model/lotofacil_model.dart';
+import 'package:loterias_caixa/model/lotomania_model.dart';
 import 'package:loterias_caixa/model/rateio_premio_model.dart';
-import 'package:loterias_caixa/pages/lotofacil/lotofacil_loading.dart';
+import 'package:loterias_caixa/pages/lotomania/lotomania_loading.dart';
 import 'package:loterias_caixa/config/global.dart' as globals;
 
-import 'lotofacil_ultimos_concursos.dart';
+import 'lotomania_ultimos_concursos.dart';
 
-class LotofacilGrid extends StatefulWidget {
-  const LotofacilGrid({super.key});
+class LotomaniaGrid extends StatefulWidget {
+  const LotomaniaGrid({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _LotofacilState createState() => _LotofacilState();
+  _LotomaniaState createState() => _LotomaniaState();
 }
 
-class _LotofacilState extends State<LotofacilGrid> {
-  final LotofacilBloc _lotofacilBloc = LotofacilBloc();
+class _LotomaniaState extends State<LotomaniaGrid> {
+  final LotomaniaBloc _lotomaniaBloc = LotomaniaBloc();
   int concursoFinal = 0;
   late BannerAd bannerAd;
   late BannerAd bannerAd2;
@@ -40,7 +40,7 @@ class _LotofacilState extends State<LotofacilGrid> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      _lotofacilBloc.add(GetLotofacilList(concursoFinal));
+      _lotomaniaBloc.add(GetLotomaniaList(concursoFinal));
     });
     initBannerAd();
 
@@ -81,12 +81,12 @@ class _LotofacilState extends State<LotofacilGrid> {
 
   @override
   Widget build(BuildContext context) {
-    const colorThema = Color.fromARGB(255, 147, 0, 137);
+    const colorThema = Color.fromARGB(255, 247, 139, 0);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 247, 247, 248),
       body: RefreshIndicator(
           onRefresh: () async {
-            _lotofacilBloc.add(const GetLotofacilList(0));
+            _lotomaniaBloc.add(const GetLotomaniaList(0));
             await Future.delayed(const Duration(milliseconds: 10));
           },
           child: SingleChildScrollView(
@@ -146,8 +146,8 @@ class _LotofacilState extends State<LotofacilGrid> {
 
   Widget _home() {
     return BlocProvider(
-      create: (_) => _lotofacilBloc,
-      child: BlocListener<LotofacilBloc, LotofacilState>(
+      create: (_) => _lotomaniaBloc,
+      child: BlocListener<LotomaniaBloc, LotomaniaState>(
         listener: (context, state) {
           /*if (state is HomeError) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -157,26 +157,26 @@ class _LotofacilState extends State<LotofacilGrid> {
             );
           }*/
         },
-        child: BlocBuilder<LotofacilBloc, LotofacilState>(
+        child: BlocBuilder<LotomaniaBloc, LotomaniaState>(
           builder: (context, state) {
-            if (state is LotofacilInitial) {
+            if (state is LotomaniaInitial) {
               return _buildLoading();
-            } else if (state is LotofacilLoading) {
+            } else if (state is LotomaniaLoading) {
               return _buildLoading();
-            } else if (state is LotofacilLoaded) {
+            } else if (state is LotomaniaLoaded) {
               if (concursoFinal == 0) {
-                concursoFinal = state.lotofacilModel.numero;
+                concursoFinal = state.lotomaniaModel.numero;
               }
 
-              globals.resultadoLotofacilString =
-                  "Lotofácil (${state.lotofacilModel.dataApuracao})  \n\n ${state.lotofacilModel.listaDezenas[0]}   ${state.lotofacilModel.listaDezenas[1]}   ${state.lotofacilModel.listaDezenas[2]}   ${state.lotofacilModel.listaDezenas[3]}   ${state.lotofacilModel.listaDezenas[4]}  \n\n  ${state.lotofacilModel.listaDezenas[5]}    ${state.lotofacilModel.listaDezenas[6]}    ${state.lotofacilModel.listaDezenas[7]}    ${state.lotofacilModel.listaDezenas[8]}    ${state.lotofacilModel.listaDezenas[9]}   \n\n ${state.lotofacilModel.listaDezenas[10]}   ${state.lotofacilModel.listaDezenas[11]}   ${state.lotofacilModel.listaDezenas[12]}   ${state.lotofacilModel.listaDezenas[13]}   ${state.lotofacilModel.listaDezenas[14]} \n\n https://play.google.com/store/apps/details?id=com.asoltec.resultados_das_loterias ";
-              for (String item in state.lotofacilModel.listaDezenas) {
-                globals.resultadoLotofacilString + item;
+              globals.resultadoLotomaniaString =
+                  "Lotomania (${state.lotomaniaModel.dataApuracao})  \n\n ${state.lotomaniaModel.listaDezenas[0]}   ${state.lotomaniaModel.listaDezenas[1]}   ${state.lotomaniaModel.listaDezenas[2]}   ${state.lotomaniaModel.listaDezenas[3]}   ${state.lotomaniaModel.listaDezenas[4]}  \n\n  ${state.lotomaniaModel.listaDezenas[5]}    ${state.lotomaniaModel.listaDezenas[6]}    ${state.lotomaniaModel.listaDezenas[7]}    ${state.lotomaniaModel.listaDezenas[8]}    ${state.lotomaniaModel.listaDezenas[9]}   \n\n ${state.lotomaniaModel.listaDezenas[10]}   ${state.lotomaniaModel.listaDezenas[11]}   ${state.lotomaniaModel.listaDezenas[12]}   ${state.lotomaniaModel.listaDezenas[13]}   ${state.lotomaniaModel.listaDezenas[14]}  \n\n  ${state.lotomaniaModel.listaDezenas[15]}    ${state.lotomaniaModel.listaDezenas[16]}    ${state.lotomaniaModel.listaDezenas[17]}    ${state.lotomaniaModel.listaDezenas[18]}    ${state.lotomaniaModel.listaDezenas[19]}   \n\n https://play.google.com/store/apps/details?id=com.asoltec.resultados_das_loterias ";
+              for (String item in state.lotomaniaModel.listaDezenas) {
+                globals.resultadoLotomaniaString + item;
               }
 
               //return _buildLoading();
-              return _dadosMegasena(state.lotofacilModel);
-            } else if (state is HomeError) {
+              return _dadosMegasena(state.lotomaniaModel);
+            } else if (state is LotomaniaError) {
               return _offline(context, state.message);
             } else {
               return Container();
@@ -237,7 +237,7 @@ class _LotofacilState extends State<LotofacilGrid> {
         ));
   }
 
-  Widget _rowPremiacao(Lotofacil megasena) {
+  Widget _rowPremiacao(Lotomania megasena) {
     var formatter = NumberFormat("#,##0.00", "pt_BR");
     return Column(
       children: [
@@ -283,7 +283,7 @@ class _LotofacilState extends State<LotofacilGrid> {
     );
   }
 
-  Widget _rowDetalhamentoPremiacao(Lotofacil megasena) {
+  Widget _rowDetalhamentoPremiacao(Lotomania megasena) {
     return megasena.listaMunicipioUFGanhadores.isNotEmpty
         ? Column(
             children: [
@@ -446,7 +446,7 @@ class _LotofacilState extends State<LotofacilGrid> {
     ]);
   }
 
-  Widget _rowAcumulados(Lotofacil megasena) {
+  Widget _rowAcumulados(Lotomania megasena) {
     var formatter = NumberFormat("#,##0.00", "pt_BR");
     return Column(
       children: [
@@ -472,7 +472,7 @@ class _LotofacilState extends State<LotofacilGrid> {
           borderRadius: BorderRadius.all(
             Radius.circular(200),
           ),
-          color: Color.fromARGB(255, 147, 0, 137),
+          color: Color.fromARGB(255, 247, 139, 0),
         ),
         child: Center(
           child: Column(
@@ -498,17 +498,20 @@ class _LotofacilState extends State<LotofacilGrid> {
     return Colors.blue;
   }
 
-  Widget _dadosMegasena(Lotofacil megasena) {
+  Widget _dadosMegasena(Lotomania megasena) {
     List<String> linhaUm = [];
     List<String> linhaDois = [];
     List<String> linhaTres = [];
+    List<String> linhaQuatro = [];
     for (int i = 0; i < megasena.listaDezenas.length; i++) {
       if (i < 5) {
         linhaUm.add(megasena.listaDezenas[i]);
       } else if (i >= 5 && i < 10) {
         linhaDois.add(megasena.listaDezenas[i]);
-      } else {
+      } else if (i >= 10 && i < 15) {
         linhaTres.add(megasena.listaDezenas[i]);
+      } else {
+        linhaQuatro.add(megasena.listaDezenas[i]);
       }
     }
     return Column(
@@ -526,7 +529,7 @@ class _LotofacilState extends State<LotofacilGrid> {
                     ),
                     onPressed: () {
                       int concursoAnterior = megasena.numero.toInt() - 1;
-                      _lotofacilBloc.add(GetLotofacilList(concursoAnterior));
+                      _lotomaniaBloc.add(GetLotomaniaList(concursoAnterior));
                     },
                     child: const Text('< Anterior',
                         style: TextStyle(
@@ -568,7 +571,7 @@ class _LotofacilState extends State<LotofacilGrid> {
                     onPressed: () {
                       int concursoProximo = megasena.numero.toInt() + 1;
                       if (concursoProximo <= concursoFinal) {
-                        _lotofacilBloc.add(GetLotofacilList(concursoProximo));
+                        _lotomaniaBloc.add(GetLotomaniaList(concursoProximo));
                       }
                     },
                     child: const Text('Próximo >',
@@ -613,6 +616,14 @@ class _LotofacilState extends State<LotofacilGrid> {
             children: [for (var item in linhaTres) _circuloResultado(item)],
           ),
           const SizedBox(
+            height: 20,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [for (var item in linhaQuatro) _circuloResultado(item)],
+          ),
+          const SizedBox(
             height: 20.00,
           ),
           _rowAcumulados(megasena),
@@ -623,12 +634,12 @@ class _LotofacilState extends State<LotofacilGrid> {
             height: 10,
           ),
           _tituloAzul("Últimos sorteios"),
-          LotofacilUltimosConcursosGrid(concurso: megasena.numero),
+          LotomaniaUltimosConcursosGrid(concurso: megasena.numero),
           const SizedBox(
             height: 50,
           ),
           Container(
-            color: const Color.fromARGB(255, 147, 0, 137),
+            color: const Color.fromARGB(255, 247, 139, 0),
             child: Container(
                 width: double.infinity,
                 height: 25,
@@ -640,7 +651,7 @@ class _LotofacilState extends State<LotofacilGrid> {
                 )),
           ),
           Container(
-            color: const Color.fromARGB(255, 147, 0, 137),
+            color: const Color.fromARGB(255, 247, 139, 0),
             height: 30.00,
             child: Container(),
           )
@@ -674,5 +685,5 @@ class _LotofacilState extends State<LotofacilGrid> {
 
   Widget _buildLoading() => buildMovieShimmer();
 
-  Widget buildMovieShimmer() => const LotofacilLoadong();
+  Widget buildMovieShimmer() => const LotofacilLoading();
 }

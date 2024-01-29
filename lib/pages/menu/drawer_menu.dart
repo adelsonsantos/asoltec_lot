@@ -58,6 +58,14 @@ class _drawerMenu extends State<drawerMenu> {
                 route: '/quina',
                 color: const Color.fromARGB(255, 38, 0, 133),
               ),
+              ButtonIcon(
+                delay: 0.1,
+                icon: const Icon(Icons.spa,
+                    color: Color.fromARGB(255, 247, 139, 0)),
+                text: const Text('Lotomania'),
+                route: '/lotomania',
+                color: const Color.fromARGB(255, 247, 139, 0),
+              ),
             ],
           );
         },
